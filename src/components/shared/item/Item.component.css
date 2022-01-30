@@ -1,0 +1,30 @@
+.card-item {
+    height: auto;
+    flex-direction: row;
+    border: none;
+}
+
+.card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card-item-body {
+    height: 250px;
+    width: 25%;
+}
+
+.item-img {
+    height: 250px; 
+    width: 200px;
+    max-height: 450px;
+
+}
+
+.link-detail {
+    text-decoration: none;
+}
+
+.icon-cart-plus {
+    font-size: 20px;
+}

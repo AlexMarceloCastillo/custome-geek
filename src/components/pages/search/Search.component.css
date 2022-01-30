@@ -1,0 +1,14 @@
+.search {
+    width: 50%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.search .result {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.search .no-result {
+    text-align: center;
+}

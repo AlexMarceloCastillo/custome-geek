@@ -1,0 +1,13 @@
+
+.item-detail-img {
+    height: 300px;
+    width: 100%;
+}
+
+.item-detail-info {
+    padding: 2.5%;
+    border: 1px solid black;
+}
+.item-count {
+    width: 50%;
+}

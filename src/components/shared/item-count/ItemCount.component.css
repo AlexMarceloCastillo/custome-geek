@@ -1,0 +1,12 @@
+.item-count-buttons {
+    border: 0.5px solid rgb(153, 151, 151);
+}
+
+.item-count-number {
+    margin: auto;
+}
+
+.btn-add-to-cart {
+    margin: auto;
+    width: 100%;
+}

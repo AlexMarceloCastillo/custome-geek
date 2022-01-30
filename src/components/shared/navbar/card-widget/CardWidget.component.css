@@ -1,0 +1,9 @@
+.cart-widget { 
+    color: white;
+    margin: auto;
+    cursor: pointer;
+}
+
+.cart-icon {
+    font-size: 30px;
+}
