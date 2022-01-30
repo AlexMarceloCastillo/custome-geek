@@ -15,6 +15,9 @@ Venta de disfraces de la cultura geek (videojuegos, animes, peliculas/series)
 
 [localhost:3000/item/:id] ----> ItemDetail
 
+
+-------------------------------------------------
+
 #Modelo Item
 
 Disfraz {
