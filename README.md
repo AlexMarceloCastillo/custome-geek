@@ -7,10 +7,13 @@ Venta de disfraces de la cultura geek (videojuegos, animes, peliculas/series)
 
 #Rutas
 
-/ ----> HomeComponent
-/category/:id ----> HomeComponent
-/search ----> SearchComponent
-/item/:id ----> ItemDetail
+[localhost:3000/] ----> HomeComponent
+
+[localhost:3000/category/:id] ----> HomeComponent
+
+[localhost:3000/search] ----> SearchComponent
+
+[localhost:3000/item/:id] ----> ItemDetail
 
 #Modelo Item
 
