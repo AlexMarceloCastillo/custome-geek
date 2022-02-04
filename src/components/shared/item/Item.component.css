@@ -1,12 +1,12 @@
 .card-item {
     height: auto;
     flex-direction: row;
-    border: none;
+    border-radius: 10%;
 }
 
 .card-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+    transition: transform 330ms ease-in-out;
 }
 
 .card-item-body {
@@ -18,7 +18,7 @@
     height: 250px; 
     width: 200px;
     max-height: 450px;
-
+    border-radius: 10%;
 }
 
 .link-detail {

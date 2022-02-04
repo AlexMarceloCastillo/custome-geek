@@ -37,12 +37,12 @@ const items = [
     },
     {
         id: 5,
-        title: "Payaso It version 2017",
+        title: "Pennywise 2017 version",
         price: 12000,
         description: "Disfraz de la pelicula del 2017.",
         category: 'movie',
         stock: 55,
-        pictureUrl: "https://m.media-amazon.com/images/I/7187ODb6QFL._AC_UX385_.jpg"
+        pictureUrl: "https://i.mmo.cm/is/image/mmoimg/mw-product-max/pennywise-2017-deluxe-costume--mw-135581-1.jpg"
     },
     {
         id: 6,
@@ -81,16 +81,15 @@ const filterByCat = (category) => {
     let itemsFinded = items.filter((item) => {
         return item.category === category
     })
-    console.log(itemsFinded)
     return internetConnection(itemsFinded)
 
 }
 
 //Obtener items por busqueda
-const searchItems = (search) => {
+const searchItems = (search ='') => {
     let itemsFinded = items.filter((item) => {
-        let searchExpr = new RegExp(search)
-        return item.title.match(searchExpr) || item.description.match(searchExpr) || item.price.toString().match(searchExpr)
+        let searchExpr = new RegExp(search.toLowerCase().trim())
+        return item.title.toLowerCase().match(searchExpr) || item.description.toLowerCase().match(searchExpr) || item.price.toString().match(searchExpr)
     })
     return internetConnection(itemsFinded);
 }

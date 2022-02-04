@@ -34,7 +34,7 @@ const ItemListContainerComponent = () => {
 
 
     return (
-        <div className="item-list-container">
+        <div className="container item-list-container">
             <LoaderComponent isLoading={loading} />
             { itemsData ? <ItemListComponent items={itemsData} /> : <h1>No se encontraron datos</h1>}
 

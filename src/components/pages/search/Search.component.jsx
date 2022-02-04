@@ -26,7 +26,6 @@ const SearchComponent = () => {
         .then((res) => {
             setLoading(false);
             setItems(res);
-            console.log(res)
         })
     },[search])
 
@@ -39,10 +38,8 @@ const SearchComponent = () => {
     return (
         <div className="search">
             <h5 className="result">Resultados de la busqueda de "{searchQuery}"</h5>
-            <LoaderComponent isLoading={loading} />
-            { items.length && !loading ? renderData : <h1 className="no-result">No se encontraron datos</h1> }
-            {/* { items ? <ItemListComponent items={items} /> : <h1>No se encontraron datos</h1>} */}
-            {/* { items ? <ItemComponent item={items[0]} /> : <h1>No se encontraron datos</h1>} */}
+            
+            { !loading ? (items.length ? renderData :  <h1 className="no-result">No se encontraron datos</h1>) : <LoaderComponent isLoading={loading} />}
         </div>
     );
 }

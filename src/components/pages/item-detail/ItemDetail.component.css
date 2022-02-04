@@ -1,6 +1,5 @@
-
 .item-detail-img {
-    height: 300px;
+    max-height: 500px;
     width: 100%;
 }
 
@@ -9,5 +8,5 @@
     border: 1px solid black;
 }
 .item-count {
-    width: 50%;
+    width: 100%;
 }
