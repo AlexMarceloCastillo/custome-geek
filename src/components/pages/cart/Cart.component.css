@@ -1,0 +1,29 @@
+.cart-table {
+    padding: 1%;
+}
+
+.cart-checkout {
+    padding: 1%;
+}
+
+
+.cart-item-table-row .td-text {
+    vertical-align: middle;
+    margin: 100%;
+    text-align: center;
+}
+
+.cart-item-img {
+    width: 75px;
+    height: 75px;
+    margin-right: 5px;
+}
+.link-item {
+    text-decoration: none;
+    color: rgb(15, 15, 50);
+}
+.btn-delete-icon {
+    color: red;
+    border-radius: 100%;
+    font-size: 20px;
+}

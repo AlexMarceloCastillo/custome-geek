@@ -51,7 +51,7 @@ const NavbarComponent = () => {
                         <input className="form-control me-2" value={search} onChange={handleSearch} type="search" placeholder="Buscar" aria-label="Buscar"/>
                         <button className="btn btn-outline-success" type ="submit" onClick={goSearch}><AiOutlineSearch /></button>
                     </form>
-                    <CardWidgetComponent count={0}></CardWidgetComponent>
+                    <CardWidgetComponent />
                 </div>
             </div>
         </nav>

@@ -29,7 +29,7 @@ const ItemCountComponent = ({initial, stock, onAdd}) => {
                     <AiOutlinePlus className={count === stock ? 'icon-disabled' : 'icon-active'} />
                 </button>
             </div>
-            <button className="btn btn-primary btn-add-to-cart mt-2" onClick={() => { onAdd(count, () => { setCount(0) }, () => { setCount(stock - count) }) }} disabled={count <= 0}>Agregar al carrito</button>
+            <button className="btn btn-primary btn-add-to-cart mt-2" onClick={() => { onAdd(count)} } disabled={count <= 0}>Agregar al carrito</button>
         </div>
     );
 }

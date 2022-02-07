@@ -12,9 +12,13 @@ import ItemDetailContainer from './components/pages/item-detail/ItemDetailContai
 import CartComponent from './components/pages/cart/Cart.component.jsx';
 import SearchComponent from './components/pages/search/Search.component.jsx';
 
+//context
+import CartContextProvider from './components/context/cart-context/CartContextProvider.jsx';
+
 const App = () => {
   return (
     <BrowserRouter>
+    <CartContextProvider>
       <NavbarComponent></NavbarComponent>
       <Routes>
         <Route exact path="/" element={<HomeComponent />}></Route>
@@ -23,6 +27,7 @@ const App = () => {
         <Route path="/search" element={<SearchComponent />}></Route>
         <Route path="/cart" element={<CartComponent />}></Route>
       </Routes>
+    </CartContextProvider>
     </BrowserRouter>
   );
 }

@@ -7,13 +7,18 @@ import ItemCountComponent from '../../shared/item-count/ItemCount.component.jsx'
 //css
 import './ItemDetail.component.css'
 
+//context
+import { useCartContext } from '../../context/cart-context/CartContextProvider.jsx';
+
 const ItemDetailComponent = ({ item }) => {
+
+    const { addToCart } = useCartContext()
 
     const [itemProduct, setTotalProduct] = useState(null)
 
     const onAdd = (quantity) => {
-        setTotalProduct({ item, quantity})
-        console.log('Item saved in cart!')
+        setTotalProduct(item)
+        addToCart(item, quantity)
     }
 
     return (
