@@ -1,16 +1,21 @@
 
 
 //Añadir en el cart list
-const addItem = (cartList, item, quantity = 0) => {
-    let existsInCart = isInCart(cartList, item.id)
-    if (existsInCart >= 0) {
-        if (!quantity && cartList[existsInCart].quantity < item.stock) {
-            cartList[existsInCart].quantity++
+const addItem = (cartList, item, quantity) => {
+    let index = isInCart(cartList, item.id)
+    if (index >= 0) {
+        //Existe en el carrito sin haberle seteado la cantidad (desde home)
+        if (!quantity && cartList[index].quantity < item.stock) {
+            cartList[index].quantity++
         }
-        if (quantity) {
-            cartList[existsInCart].quantity = quantity
+        if (quantity && cartList[index].quantity + quantity > cartList[index].item.stock) {
+            throw new Error(`No puedes añadir esa cantidad al carrito — tenemos ${item.stock} existencias y tienes ${cartList[index].quantity} actualmente en tu carrito.`)
+        }else {
+            cartList[index].quantity = cartList[index].quantity + quantity
         }
+
     } else {
+        //No existe en el carrito agregar un producto nuevo 
         cartList.push({ item, quantity: quantity > 0 ? quantity : 1 })
     }
     return cartList
@@ -26,7 +31,7 @@ const removeItemInCart = (cartList, item, setCartCount) => {
     return auxArr
 }
 
-//Si existe en el cart list aumentar su cantidad
+//Devuelve el index si es que existe el item
 const isInCart = (cartList, id) => {
     let index = cartList.findIndex((cart) => {
         return cart.item.id === id;

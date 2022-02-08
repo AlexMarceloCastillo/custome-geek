@@ -15,7 +15,7 @@ const items = [
         price: 20000,
         description: "Stormtrooper dorado de Star Wars",
         category: 'movie',
-        stock: 15,
+        stock: 4,
         discount: 0,
         pictureUrl: "https://m.media-amazon.com/images/I/61MqjlOJyeL._AC_SY606_.jpg"
     },
@@ -25,7 +25,7 @@ const items = [
         price: 5000,
         description: "Bata del Anime Naruto",
         category: 'anime',
-        stock: 25,
+        stock: 6,
         discount: 0,
         pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_2X_825545-MLA47499540448_092021-F.webp"
     },
@@ -35,7 +35,7 @@ const items = [
         price: 15000,
         description: "Armadura videojuego fallout",
         category: 'videogame',
-        stock: 40,
+        stock: 3,
         discount:0,
         pictureUrl: "https://www.mythfactoryshop.com/38175-large_default/T-60-Camouflage-Power-Armor-ThreeZero-Fallout.jpg"
     },
@@ -45,7 +45,7 @@ const items = [
         price: 12000,
         description: "Disfraz de la pelicula del 2017.",
         category: 'movie',
-        stock: 55,
+        stock: 6,
         discount: 25,
         pictureUrl: "https://i.mmo.cm/is/image/mmoimg/mw-product-max/pennywise-2017-deluxe-costume--mw-135581-1.jpg"
     },
@@ -54,7 +54,7 @@ const items = [
         title: "Dinosaurio Naranja",
         description: "Disfraz completo de dinosaurio camuflado color naranja",
         price: 8000,
-        stock: 79,
+        stock: 5,
         discount: 21,
         category: 'others',
         pictureUrl: "https://ae01.alicdn.com/kf/H672220c12170440b9e3babb9053b3f73x/Adult-Inflatable-Dinosaur-Costume-T-REX-Cosplay-Party-Costume-Halloween-Costumes-for-Men-Women-Anime-Fancy.jpg_Q90.jpg_.webp"
