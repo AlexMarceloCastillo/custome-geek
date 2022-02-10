@@ -12,3 +12,8 @@
 .search .no-result {
     text-align: center;
 }
+
+.card-item {
+    margin-bottom: 50px;
+    margin: 25px auto;
+}

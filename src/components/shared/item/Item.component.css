@@ -1,4 +1,5 @@
 .card-item {
+    width: auto;
     height: auto;
     flex-direction: row;
     border-radius: 10%;
@@ -28,4 +29,17 @@
 
 .icon-cart-plus {
     font-size: 20px;
+}
+
+.offer {
+    background-color: yellow;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -10px;
+    left: -25px;
 }

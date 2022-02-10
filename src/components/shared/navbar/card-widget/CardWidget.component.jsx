@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './CardWidget.component.css';
 
 //icons
-import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { FiShoppingCart } from 'react-icons/fi';
 
 //context
 import { useCartContext } from '../../../context/cart-context/CartContextProvider'; 
@@ -14,9 +14,9 @@ const CardWidgetComponent = () => {
     const { cartCount } = useCartContext()
     return (
         <div className="cart-widget">
-            <Link to={'/cart'} style={{color:'inherit',textDecorationStyle: 'inherit'}}>
-            {cartCount}
-            <AiOutlineShoppingCart className="cart-icon" />
+            <Link to={'/cart'} style={{color:'inherit',textDecoration: 'none'}}>
+            <span>{cartCount}</span>
+            <FiShoppingCart className="cart-icon" />
             </Link>
         </div>
     );

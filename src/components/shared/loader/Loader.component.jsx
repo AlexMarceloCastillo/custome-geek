@@ -1,8 +1,7 @@
 import React from 'react';
 
 //Icons
-import {ImSpinner8} from 'react-icons/im';
-
+import { GiSpiderMask } from 'react-icons/gi';
 //Css
 
 import "./Loader.component.css"; 
@@ -12,7 +11,7 @@ const LoaderComponent = ({isLoading}) => {
 
     const loadingData = () => {
         if (isLoading) {
-          return <ImSpinner8 className="icon-loading" />
+          return <GiSpiderMask className="icon-loading" />
         } else {
           return 
         }

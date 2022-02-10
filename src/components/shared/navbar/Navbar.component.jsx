@@ -8,6 +8,9 @@ import CardWidgetComponent from './card-widget/CardWidget.component.jsx';
 //icons
 import { AiOutlineSearch } from 'react-icons/ai'
 
+//css
+import './Navbar.component.css'
+
 
 const NavbarComponent = () => {
     const navigate = useNavigate();

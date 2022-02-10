@@ -28,6 +28,7 @@ const ItemComponent = ({ item }) => {
                         <h5 className="card-title">{item.title}</h5>
                         <p className="card-text">Categoria: {item.category}</p>
                         <p className="card-text text-success">${item.price}</p>
+                        { item.discount > 0 && <p className="card-text offer">-{item.discount}%</p> }
                         <Link to={"/item/"+item.id}><button className="btn btn-outline-secondary"><BsEye /></button></Link>
                         <button className="btn btn-outline-success float-end mr-4" onClick={onAdd}><BsCartPlus className="icon-cart-plus" /></button>
                     </div>

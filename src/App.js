@@ -15,6 +15,9 @@ import SearchComponent from './components/pages/search/Search.component.jsx';
 //context
 import CartContextProvider from './components/context/cart-context/CartContextProvider.jsx';
 
+//css
+import './App.css'
+
 const App = () => {
   return (
     <BrowserRouter>
