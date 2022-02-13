@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 //utils
-import { getItems, filterByCat } from '../../../utils/items';
+import { getAllProducts, getProductsByCategory } from '../../../utils/items';
 
 //components
 import LoaderComponent from '../../shared/loader/Loader.component';
@@ -10,25 +10,22 @@ import ItemListComponent from './ItemList.component';
 
 const ItemListContainerComponent = () => {
 
-    const [itemsData, setItemsData] = useState([]);
+    const [productsData, setProductsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const { idCategory } = useParams()
 
-    useEffect(() => {
+    useEffect(async () => {
+
         setLoading(true);
-        setItemsData([]);
+        setProductsData([]);
         if (idCategory) {
-            filterByCat(idCategory)
-                .then(data => {
-                    setLoading(false);
-                    setItemsData(data);
-                })
+            let products = await getProductsByCategory(idCategory)
+            setLoading(false);
+            setProductsData(products)
         }else {
-            getItems()
-            .then(data => {
-                setLoading(false);
-                setItemsData(data)
-            })
+            let products = await getAllProducts();
+            setLoading(false);
+            setProductsData(products)
         }
     }, [idCategory])
 
@@ -36,7 +33,7 @@ const ItemListContainerComponent = () => {
     return (
         <div className="container item-list-container">
             <LoaderComponent isLoading={loading} />
-            { itemsData ? <ItemListComponent items={itemsData} /> : <h1>No se encontraron datos</h1>}
+            { productsData ? <ItemListComponent items={productsData} /> : <h1>No se encontraron datos</h1>}
 
         </div>
     );

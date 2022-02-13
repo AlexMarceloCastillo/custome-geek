@@ -1,3 +1,6 @@
+//firebase
+import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+
 const items = [
     {
         id: 1,
@@ -5,7 +8,7 @@ const items = [
         price: 2500,
         description: "Remera con estampado cobra kai color negro",
         category: 'movie',
-        stock:5,
+        stock: 5,
         discount: 10,
         pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_867066-MLA45331368641_032021-O.webp"
     },
@@ -36,7 +39,7 @@ const items = [
         description: "Pijama del superheroe spiderman color azul",
         category: 'movie',
         stock: 3,
-        discount:0,
+        discount: 0,
         pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_795056-MLA48291643397_112021-O.webp"
     },
     {
@@ -83,9 +86,9 @@ const items = [
 //DTO
 const itemDTO = (item) => {
     return {
-        id: item.id, 
-        title: item.title, 
-        price: item.price - (item.price * (item.discount/100)),
+        id: item.id,
+        title: item.title,
+        price: item.price - (item.price * (item.discount / 100)),
         discount: item.discount,
         originalPrice: item.price,
         stock: item.stock,
@@ -99,41 +102,13 @@ const itemDTO = (item) => {
 const internetConnection = (data) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            return resolve(data)}, 2000)
+            return resolve(data)
+        }, 2000)
     })
-}
-
-//Obtener todos los items
-const getItems = () => {
-    let finalData = items.map(item => {
-        return itemDTO(item)
-    })
-    return internetConnection(finalData)
-}
-
-//Obtener item por id
-const filterById = (id) => {
-    let itemFinded = items.find((item) => {
-        return item.id === id;
-    })
-    let finalItem = itemDTO(itemFinded)
-    return internetConnection(finalItem)
-}
-
-//Obtener item por categoria
-const filterByCat = (category) => {
-    let itemsFinded = items.filter((item) => {
-        return item.category === category
-    })
-    let finalData = itemsFinded.map(item => {
-        return itemDTO(item)
-    })
-    return internetConnection(finalData)
-
 }
 
 //Obtener items por busqueda
-const searchItems = (search ='') => {
+const searchItems = (search = '') => {
     let itemsFinded = items.filter((item) => {
         let searchExpr = new RegExp(search.toLowerCase().trim())
         return item.title.toLowerCase().match(searchExpr) || item.description.toLowerCase().match(searchExpr) || item.price.toString().match(searchExpr)
@@ -145,5 +120,43 @@ const searchItems = (search ='') => {
 }
 
 
+//Firebase 
 
-export { getItems, filterById, filterByCat, searchItems }
+//Obtener un producto por id
+const getOneProduct = async (id) => {
+    try {
+        const itemRef = doc(getFirestore(), 'productos', id)
+        let response = await getDoc(itemRef)
+        return itemDTO(response.data())
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+//Obtener todos los productos
+const getAllProducts = async () => {
+    try {
+        const queryCollection = collection(getFirestore(), 'productos')
+        let response = await getDocs(queryCollection)
+        let products = response.docs.map(prod => (itemDTO(prod.data())))
+        return products
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+//Obtener productos por categoria
+const getProductsByCategory = async (category) => {
+    try {
+        const queryCollection = collection(getFirestore(), 'productos')
+        const queryFilter = query(queryCollection, where('category','==',category) )
+        let response = await getDocs(queryFilter)
+        let products = response.docs.map(prod => (itemDTO(prod.data())))
+        return products
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+
+export { searchItems, getOneProduct, getAllProducts, getProductsByCategory }

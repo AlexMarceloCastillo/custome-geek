@@ -6,37 +6,39 @@ import LoaderComponent from '../../shared/loader/Loader.component';
 import ItemDetailComponent from './ItemDetail.component';
 
 //utils
-import { filterById } from '../../../utils/items';
+import { getOneProduct } from '../../../utils/items';
 
 const ItemDetailContainerComponent = () => {
-    const [item, setItem] = useState({});
+    const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
-    
-    useEffect(() => {
-        filterById(Number(id))
-        .then((item) => {
-            setItem(item);
+
+    useEffect(async () => {
+        try {
+            let product = await getOneProduct(id)
             setLoading(false);
-        })
-        .catch((err) => console.log(err))
-    },[id])
+            setProduct(product)
+        } catch (error) {
+            console.log('Error', error)
+            setLoading(false);
+        }
+    }, [id])
 
     const itemDetail = () => {
-        if(item){
+        if (product) {
             //si existe
-            return <ItemDetailComponent item={item} />
-        }else{
+            return <ItemDetailComponent item={product} />
+        } else {
             return <h1>No se encontraron resultados =(</h1>
         }
-        
+
     }
-    
+
     return (
         <div>
             <LoaderComponent isLoading={loading} />
             {
-                !loading &&  
+                !loading &&
                 itemDetail()
             }
         </div>

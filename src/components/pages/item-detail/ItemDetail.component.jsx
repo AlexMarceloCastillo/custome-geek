@@ -47,8 +47,8 @@ const ItemDetailComponent = ({ item }) => {
                         <h4 className="card-title">{item.title}</h4>
                         <h5 className="card-text" >
                             <span style={{marginRight:5+'px',fontSize: 15+'px',textDecoration: 'line-through'}}>
-                                { item.originalPrice !== item.price && '$'+item.originalPrice+',00' }</span>
-                            ${item.price}, 00</h5>
+                                { item.originalPrice !== item.price && item.originalPrice+',00 ARS' }</span>
+                            {item.price}, 00 ARS</h5>
                         <p className="card-text">Categoria: {item.category}</p>
                         <p className="card-text">{item.description}</p>
                         <p className="card-text text-success">{item.stock} disponibles</p>

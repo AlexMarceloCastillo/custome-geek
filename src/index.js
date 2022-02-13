@@ -8,6 +8,9 @@ import {  } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App';
+import getFirestoreApp from './firebase/config';
+
+getFirestoreApp()
 
 ReactDOM.render(
   <React.StrictMode>
