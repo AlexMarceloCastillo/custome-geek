@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //shared components
 import NavbarComponent from './components/shared/navbar/Navbar.component.jsx';
@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
     <CartContextProvider>
       <NavbarComponent />
       <Routes>
@@ -34,7 +34,7 @@ const App = () => {
       <FooterComponent />
       <ToastContainer />
     </CartContextProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
