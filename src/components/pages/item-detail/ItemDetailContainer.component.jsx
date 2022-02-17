@@ -8,16 +8,22 @@ import ItemDetailComponent from './ItemDetail.component';
 //utils
 import { getOneProduct } from '../../../utils/items';
 
+//css
+import './ItemDetailContainer.component.css';
+
 const ItemDetailContainerComponent = () => {
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
     const { id } = useParams();
 
-    useEffect(async () => {
+    useEffect(() => {
         try {
-            let product = await getOneProduct(id)
-            setLoading(false);
-            setProduct(product)
+            async function getData() {
+                let product = await getOneProduct(id)
+                setLoading(false);
+                setProduct(product)
+            }
+            getData();
         } catch (error) {
             console.log('Error', error)
             setLoading(false);
@@ -35,7 +41,7 @@ const ItemDetailContainerComponent = () => {
     }
 
     return (
-        <div>
+        <div className="item-detail-container">
             <LoaderComponent isLoading={loading} />
             {
                 !loading &&

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { useEffect } from 'react/cjs/react.development';
 
 //components
 import ItemComponent from '../../shared/item/Item.component';
@@ -27,7 +26,7 @@ const SearchComponent = () => {
             setLoading(false);
             setItems(res);
         })
-    },[search])
+    },[searchQuery])
 
     const renderData = 
         items.map((item, index) => {

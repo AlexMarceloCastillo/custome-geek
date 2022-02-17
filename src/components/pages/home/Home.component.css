@@ -5,45 +5,10 @@
 .home-section {
     width: 100%;
     padding: 100px;
-    height: 550px;
     background: url('../../../assets/img/background-home.jpg') no-repeat center/cover;
 }
 
-.info {
-    height: 310px;
-}
 
-.card-search {
-    animation-duration: 3s;
-    animation-name: slidetop;
-}
 
-@keyframes slidetop {
-    from {
-        margin-top: 30%;
-    }
 
-    to {
-        margin-top: 0%;
-    }
-}
 
-.card-about {
-    animation-duration: 3s;
-    animation-name: slidebottom;
-}
-
-@keyframes slidebottom {
-    from {
-        margin-bottom: 30%;
-    }
-
-    to {
-        margin-bottom: 0%;
-    }
-}
-
-.card-pay {
-    animation-duration: 3s;
-    animation-name: slidetop;
-}

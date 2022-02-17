@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
 
 //utils
-import { addItem, increaseCart, removeItemInCart } from '../../../utils/cart';
+import { addItem, increaseCart, removeItemInCart, countTotal } from '../../../utils/cart';
 
+//toast
+import { toast } from 'react-toastify';
 
 const cartContext = createContext([])
 
@@ -15,19 +17,37 @@ const CartContextProvider = ({ children}) => {
 
     const [cartList, setCartList] = useState([])
     const [cartCount, setCartCount] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const addToCart = (item, quantity = 0) => {
         setCartList(addItem(cartList, item, quantity))
         setCartCount(increaseCart(cartList))
+        toast.success(`Producto ${item.title} añadido a su carrito`, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            theme: 'colored'
+        })
     }
 
     const removeItem = (item) => {
-        setCartList(removeItemInCart(cartList, item, setCartCount))
+        setCartList(removeItemInCart(cartList, item, setCartCount, setTotalPrice))
+        toast.success(`Producto ${item.title} eliminado de su carrito`, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            theme: 'colored'
+        })
     }
 
     const cleanCart = () => {
         setCartCount(0)
         setCartList([])
+        setTotalPrice(0)
+        toast.success(`Todos los productos eliminados de su carrito`, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            theme: 'colored'
+        })
+    }
+
+    const countTotalPrice = () => {
+        setTotalPrice(countTotal(cartList))
     }
 
     return (
@@ -36,6 +56,8 @@ const CartContextProvider = ({ children}) => {
             addToCart,
             removeItem,
             cleanCart,
+            countTotalPrice,
+            totalPrice,
             cartCount
         }}>
             {children}

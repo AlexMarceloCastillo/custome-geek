@@ -30,7 +30,7 @@ const ItemComponent = ({ item }) => {
                         <p className="card-text">{item.price} ARS</p>
                         { item.discount > 0 && <p className="card-text offer">-{item.discount}%</p> }
                         <Link to={"/item/"+item.id}><button className="btn btn-outline-secondary"><BsEye /></button></Link>
-                        <button className="btn btn-outline-success float-end mr-4" onClick={onAdd}><BsCartPlus className="icon-cart-plus" /></button>
+                        <button className="btn btn-add-to-cart-geek float-end mr-4" onClick={onAdd}  disabled={item.stock <= 0}><BsCartPlus className="icon-cart-plus"/></button>
                     </div>
                 </div>
     );

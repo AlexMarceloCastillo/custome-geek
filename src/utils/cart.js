@@ -9,8 +9,8 @@ const addItem = (cartList, item, quantity) => {
             cartList[index].quantity++
         }
         if (quantity && cartList[index].quantity + quantity > cartList[index].item.stock) {
-            throw new Error(`No puedes añadir esa cantidad al carrito — tenemos ${item.stock} existencias y tienes ${cartList[index].quantity} actualmente en tu carrito.`)
-        }else {
+            throw new Error(`No puedes añadir esa cantidad(${quantity}) al carrito — tenemos ${item.stock} existencias y tienes ${cartList[index].quantity} en tu carrito.`)
+        } else {
             cartList[index].quantity = cartList[index].quantity + quantity
         }
 
@@ -22,13 +22,14 @@ const addItem = (cartList, item, quantity) => {
 }
 
 //Remover item del cart list
-const removeItemInCart = (cartList, item, setCartCount) => {
-    let auxArr = []
-    auxArr = cartList.filter((cart) => {
+const removeItemInCart = (cartList, item, setCartCount, setTotalPrice) => {
+    let cartListRemoved = []
+    cartListRemoved = cartList.filter((cart) => {
         return cart.item.id !== item.id
     })
-    setCartCount(increaseCart(auxArr))
-    return auxArr
+    setCartCount(increaseCart(cartListRemoved))
+    setTotalPrice(countTotal(cartListRemoved))
+    return cartListRemoved
 }
 
 //Devuelve el index si es que existe el item
@@ -49,4 +50,13 @@ const increaseCart = (cartList) => {
     return quantity;
 }
 
-export { addItem, increaseCart, isInCart, removeItemInCart }
+//Contar total del precio
+const countTotal = (cartList) => {
+    let total = 0
+    cartList.forEach(cartItem => {
+        total += cartItem.item.price * cartItem.quantity;
+    })
+    return total
+}
+
+export { addItem, increaseCart, isInCart, removeItemInCart, countTotal }

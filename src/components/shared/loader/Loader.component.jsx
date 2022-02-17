@@ -1,9 +1,9 @@
 import React from 'react';
 
-//Icons
+//icons
 import { GiSpiderMask } from 'react-icons/gi';
-//Css
 
+//css
 import "./Loader.component.css"; 
 
 

@@ -1,88 +1,6 @@
 //firebase
-import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { addDoc, collection, doc, documentId, getDoc, getDocs, getFirestore, query, writeBatch, where } from 'firebase/firestore';
 
-const items = [
-    {
-        id: 1,
-        title: "Remera de hombre cobra kai",
-        price: 2500,
-        description: "Remera con estampado cobra kai color negro",
-        category: 'movie',
-        stock: 5,
-        discount: 10,
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_867066-MLA45331368641_032021-O.webp"
-    },
-    {
-        id: 2,
-        title: "Remera mars attacks!",
-        price: 3500,
-        description: "Remera con estampado de la pelicula mars attacks(1996)!",
-        category: 'movie',
-        stock: 4,
-        discount: 15,
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_628369-MLA48125749549_112021-O.webp"
-    },
-    {
-        id: 3,
-        title: "Remera Akatsuki color negro",
-        price: 2000,
-        description: "Remera del anime Naruto con estampado de la nube roja akatsuki de fondo negro",
-        category: 'anime',
-        stock: 6,
-        discount: 0,
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_823653-MLA48843869206_012022-O.webp"
-    },
-    {
-        id: 4,
-        title: "Pijama spiderman",
-        price: 2400,
-        description: "Pijama del superheroe spiderman color azul",
-        category: 'movie',
-        stock: 3,
-        discount: 0,
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_795056-MLA48291643397_112021-O.webp"
-    },
-    {
-        id: 5,
-        title: "Mascara Scorpion MKX",
-        price: 1800,
-        description: "Mascara con impresion 3D de Scorpion del videojuego mortal kombat 10",
-        category: 'videogame',
-        stock: 6,
-        discount: 25,
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_888524-MLA42234928794_062020-O.webp"
-    },
-    {
-        id: 6,
-        title: "Casco The Mandalorian",
-        description: "Hasbro Star Wars Black Series - The Mandalorian Casco 1/1",
-        price: 50000,
-        stock: 5,
-        discount: 20,
-        category: 'movie',
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_860446-MLA48830448859_012022-O.webp"
-    },
-    {
-        id: 7,
-        title: "Remera De Hombre Los Pollos Hermanos",
-        description: "Remera de la serie Breaking Bad",
-        price: 2500,
-        stock: 9,
-        discount: 0,
-        category: 'serie',
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_795115-MLA25137919487_102016-O.webp"
-    },
-    {
-        id: 8,
-        title: "Remera Attack on Titan Titan#3",
-        description: "Remera blanca con estampado del anime snk titan numero 3",
-        price: 1500,
-        stock: 9,
-        discount: 0,
-        category: 'anime',
-        pictureUrl: "https://http2.mlstatic.com/D_NQ_NP_844314-MLA42115400189_062020-O.webp"
-    }
-]
 //DTO
 const itemDTO = (item) => {
     return {
@@ -98,26 +16,7 @@ const itemDTO = (item) => {
     }
 }
 
-//Simular retardo de internet a la hora de obtener datos
-const internetConnection = (data) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            return resolve(data)
-        }, 2000)
-    })
-}
 
-//Obtener items por busqueda
-const searchItems = (search = '') => {
-    let itemsFinded = items.filter((item) => {
-        let searchExpr = new RegExp(search.toLowerCase().trim())
-        return item.title.toLowerCase().match(searchExpr) || item.description.toLowerCase().match(searchExpr) || item.price.toString().match(searchExpr)
-    })
-    let finalData = itemsFinded.map(item => {
-        return itemDTO(item)
-    })
-    return internetConnection(finalData);
-}
 
 
 //Firebase 
@@ -149,7 +48,7 @@ const getAllProducts = async () => {
 const getProductsByCategory = async (category) => {
     try {
         const queryCollection = collection(getFirestore(), 'productos')
-        const queryFilter = query(queryCollection, where('category','==',category) )
+        const queryFilter = query(queryCollection, where('category', '==', category))
         let response = await getDocs(queryFilter)
         let products = response.docs.map(prod => (itemDTO(prod.data())))
         return products
@@ -158,5 +57,98 @@ const getProductsByCategory = async (category) => {
     }
 }
 
+//Obtener productos por offerta
+const getProductsInOffer = async () => {
+    try {
+        const queryCollection = collection(getFirestore(), 'productos')
+        const queryFilter = query(queryCollection, where('offer', '!=', 0))
+        let response = await getDocs(queryFilter)
+        let products = response.docs.map(prod => (itemDTO(prod.data())))
+        return products
+    } catch (error) {
+        throw new Error(error)
+    }
+}
 
-export { searchItems, getOneProduct, getAllProducts, getProductsByCategory }
+//Obtener items por busqueda
+const searchItems = async (search = '') => {
+    try {
+        let products = await getAllProducts()
+        let productsFinded = products.filter(prod => {
+            let searchExpr = new RegExp(search.toLowerCase().trim())
+            return prod.title.toLowerCase().match(searchExpr) || prod.description.toLowerCase().match(searchExpr) || prod.price.toString().match(searchExpr)
+        })
+        let finalData = productsFinded.map(item => {
+            return itemDTO(item)
+        })
+        return finalData
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+//Control stock
+const controlStock = async (cart) => {
+    const queryCollection = collection(getFirestore(), 'productos')
+
+    let queryControlStock = query(queryCollection, 
+        where(documentId(), 'in', cart.map(cartItem => cartItem.item.id)))
+    let products = await getDocs(queryControlStock)
+    products.docs.forEach(product => {
+        if(product.data().stock - cart.find(cartItem => cartItem.item.id ===product.id).quantity < 0) {
+            throw new Error(`Error al crear el orden, el producto ${product.title} no tiene stock`)
+        }
+    })
+    return true
+
+}
+
+//Actualizar stock
+const updateStock = async (cart) => {
+    try {
+
+        const queryCollection = collection(getFirestore(), 'productos')
+        const queryUpdateStock = query(
+            queryCollection,
+            where(documentId(), 'in', cart.map(cartItem => cartItem.item.id)))
+        const batch = writeBatch(getFirestore())
+
+
+        let products = await getDocs(queryUpdateStock)
+        products.docs.forEach(res => {
+            batch.update(res.ref, {
+                stock: res.data().stock - cart.find(cartItem => cartItem.item.id ===res.id).quantity
+            })
+        })
+
+        await batch.commit()
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+//Crear orden
+const createOrden = async (cart, price, buyer) => {
+    try {
+        await controlStock(cart)
+        const itemsCart = cart.map((cartItem) => {
+            return { id: cartItem.item.id, title: cartItem.item.title, price: cartItem.item.price * cartItem.quantity }
+        })
+        let newOrder = {
+            buyer,
+            date: new Date(),
+            items: itemsCart,
+            total: price
+        }
+
+        const ordersCollection = collection(getFirestore(), 'orders')
+        let orderCreated = await addDoc(ordersCollection, newOrder)
+        await updateStock(cart)
+        return orderCreated;
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+
+
+export { searchItems, getOneProduct, getAllProducts, getProductsByCategory, getProductsInOffer, createOrden }

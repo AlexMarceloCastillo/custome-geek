@@ -15,7 +15,7 @@ const CardWidgetComponent = () => {
     return (
         <div className="cart-widget">
             <Link to={'/cart'} style={{color:'inherit',textDecoration: 'none'}}>
-            <span>{cartCount}</span>
+            {cartCount > 0 ? <span className="cart-widget-count">{cartCount}</span> : ''}
             <FiShoppingCart className="cart-icon" />
             </Link>
         </div>

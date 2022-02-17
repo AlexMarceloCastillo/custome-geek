@@ -1,3 +1,8 @@
+
+.cart {
+    height: auto;
+    margin: auto;
+}
 .cart-table {
     padding: 1%;
 }
@@ -20,15 +25,25 @@
 }
 .link-item {
     text-decoration: none;
-    color: rgb(15, 15, 50);
+    color: black;
 }
+
+
 .btn-delete-icon {
-    color: red;
+    color:gray;
     border-radius: 100%;
     font-size: 20px;
+}
+
+.td-delete-icon:hover .btn-delete-icon {
+    color:red;
 }
 
 .no-items {
     margin: auto;
 }
 
+/* FORM CHECKOUT*/
+.form-checkout {
+    padding: 5%;
+}

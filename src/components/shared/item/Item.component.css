@@ -12,7 +12,7 @@
 }
 
 .card-item-body {
-    height: 200px;
+    height: auto;
     width: 50%;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .offer {
-    background-color: yellow;
+    background-color: #f7931e;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -42,4 +42,15 @@
     position: absolute;
     top: -10px;
     left: -25px;
+    font-weight: bold;
+}
+
+.btn-add-to-cart-geek {
+    background-color: white;
+    color: black;
+}
+
+.btn-add-to-cart-geek:hover {
+    background-color: #f7931e;
+    color: black;
 }

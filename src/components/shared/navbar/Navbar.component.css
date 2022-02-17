@@ -1,3 +1,28 @@
 .navbar {
-    z-index: 999;
+    background-color: #f7931e;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%237b7b7b' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    opacity: 0.9;
+}
+
+.nav-link {
+    text-decoration: none;
+    color:black;
+}
+.nav-link:hover {
+    text-decoration: none;
+    color: #292929;
+    border-bottom: 0.5px #292929 solid; 
+}
+
+.logo {
+    width: 75px;
+    height: 75px;
+}
+
+.btn-search{
+    background-color: black;
+}
+
+.search-icon {
+    color: #fb7e14;
 }

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 //components
 import ItemCountComponent from '../../shared/item-count/ItemCount.component.jsx';
-import LoaderComponent from '../../shared/loader/Loader.component.jsx';
 
 //css
 import './ItemDetail.component.css'
@@ -11,29 +10,34 @@ import './ItemDetail.component.css'
 //context
 import { useCartContext } from '../../context/cart-context/CartContextProvider.jsx';
 
+//toast
+import { toast } from 'react-toastify';
+
 const ItemDetailComponent = ({ item }) => {
 
-    const { cartList, addToCart } = useCartContext()
+    const { addToCart } = useCartContext()
     const [loading, setLoading] = useState(false);
     const [itemProduct, setTotalProduct] = useState(null)
-    const [errorMsg, setErrorMsg] = useState('')
 
     const onAdd = (quantity) => {
-        try {
-            setLoading(true);
-            setErrorMsg('');
-            addToCart(item, quantity);
-            setTimeout(() => {
+        setLoading(true);
+        setTimeout(() => {
+            try {
+                addToCart(item, quantity);
                 setLoading(false);
                 setTotalProduct(item)
-            }, 2000);
-
-        } catch (error) {
-            setTimeout(() => {
+                toast.success(`${quantity > 1 ? quantity + ' productos añadidos a su carrito' : ' producto añadido a su carrito'}`, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    theme: 'colored'
+                })
+            } catch (error) {
                 setLoading(false);
-                setErrorMsg(error.message)
-            }, 2000);
-        }
+                toast.error(`${error.message}`, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    theme: 'colored'
+                })
+            }
+        }, 2000);
     }
 
     return (
@@ -46,20 +50,27 @@ const ItemDetailComponent = ({ item }) => {
                     <div className="card-body">
                         <h4 className="card-title">{item.title}</h4>
                         <h5 className="card-text" >
-                            <span style={{marginRight:5+'px',fontSize: 15+'px',textDecoration: 'line-through'}}>
-                                { item.originalPrice !== item.price && item.originalPrice+',00 ARS' }</span>
+                            <span style={{ marginRight: 5 + 'px', fontSize: 15 + 'px', textDecoration: 'line-through' }}>
+                                {item.originalPrice !== item.price && item.originalPrice + ',00 ARS'}</span>
                             {item.price}, 00 ARS</h5>
                         <p className="card-text">Categoria: {item.category}</p>
                         <p className="card-text">{item.description}</p>
-                        <p className="card-text text-success">{item.stock} disponibles</p>
+                        {
+                            item.stock > 0 ?
+                                <p className="card-text text-success">{item.stock} disponibles</p> :
+                                <p className="card-text text-danger">No hay existencias disponibles</p>
+
+                        }
                         {
                             !loading & !itemProduct ?
-                            <ItemCountComponent className="item-count" stock={item.stock} initial={1} onAdd={onAdd} /> 
-                            :
-                            (itemProduct ? <Link className="btn btn-block btn-outline-success btn-lg" to={"/cart"}>Finalizar compra</Link> 
-                            : <LoaderComponent isLoading={loading} />)
+                                <ItemCountComponent className="item-count" stock={item.stock} initial={1} onAdd={onAdd} />
+                                :
+                                (itemProduct ?
+                                    <div className="d-grid gap-2">
+                                        <Link className="btn btn-block btn-outline-success btn-lg" to={"/cart"}>Finalizar compra</Link>
+                                    </div>
+                                    : <ItemCountComponent className="item-count" loading={loading} stock={item.stock} initial={1} onAdd={onAdd} />)
                         }
-                        <p className="card-text text-danger mt-2">{errorMsg}</p>
                     </div>
                 </div>
             </div>
