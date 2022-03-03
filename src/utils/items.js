@@ -1,5 +1,5 @@
 //firebase
-import { addDoc, collection, doc, documentId, getDoc, getDocs, getFirestore, query, writeBatch, where } from 'firebase/firestore';
+import { addDoc, collection, doc, documentId, getDoc, getDocs, getFirestore, limit, query, writeBatch, where } from 'firebase/firestore';
 
 //DTO
 const itemDTO = (item) => {
@@ -11,6 +11,7 @@ const itemDTO = (item) => {
         originalPrice: item.price,
         stock: item.stock,
         category: item.category,
+        garment: item.garment,
         pictureUrl: item.pictureUrl,
         description: item.description
     }
@@ -57,11 +58,28 @@ const getProductsByCategory = async (category) => {
     }
 }
 
-//Obtener productos por offerta
-const getProductsInOffer = async () => {
+//Obtener productos que podrian interesarle al usuario
+const getsMaybeInteresProductos = async (itemid, category) => {
     try {
+        const queryCollectionCategory = collection(getFirestore(), 'productos')
+        const queryFilterCategory = query(queryCollectionCategory, where('category', '==', category),limit(6))
+        let responseCategory = await getDocs(queryFilterCategory)
+        let products = responseCategory.docs.map(prod => (itemDTO(prod.data())))
+        let finalProducts = products.filter((item) => {
+            return item.id !== itemid
+        })
+        return finalProducts
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+//Obtener productos por prenda
+const getProductsByGarment = async (garment) => {
+    try {
+        let garmentCapitalize = garment.trim().toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())
         const queryCollection = collection(getFirestore(), 'productos')
-        const queryFilter = query(queryCollection, where('offer', '!=', 0))
+        const queryFilter = query(queryCollection, where('garment', '==', garmentCapitalize))
         let response = await getDocs(queryFilter)
         let products = response.docs.map(prod => (itemDTO(prod.data())))
         return products
@@ -151,4 +169,4 @@ const createOrden = async (cart, price, buyer) => {
 
 
 
-export { searchItems, getOneProduct, getAllProducts, getProductsByCategory, getProductsInOffer, createOrden }
+export { searchItems, getOneProduct, getAllProducts, getProductsByCategory, getProductsByGarment, getsMaybeInteresProductos, createOrden }

@@ -1,0 +1,38 @@
+.map-component {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    height: 400px;
+    width: 90%;
+}
+.map-component-info {
+    border-bottom: 0.5px solid gray;
+    border-top: 0.5px solid gray;
+    border-left: 0.5px solid gray;
+    text-align: start;
+    padding: 2.5%;
+    width: 25%;
+    height: 100%;
+}
+
+.map {
+    background-color: gray;
+    margin: auto;
+    width: 75%;
+    height: 100%;
+}
+
+.btn-google-maps {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-google-maps-text {
+    margin: auto;
+}
+
+.btn-maps {
+    margin: auto;
+    width: 50px;
+    height: 50px;
+}

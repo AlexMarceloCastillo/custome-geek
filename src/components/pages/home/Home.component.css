@@ -2,13 +2,8 @@
     width: 100%;
 }
 
-.home-section {
-    width: 100%;
-    padding: 100px;
-    background: url('../../../assets/img/background-home.jpg') no-repeat center/cover;
+
+.carousel-img {
+    height: 600px;
 }
-
-
-
-
 

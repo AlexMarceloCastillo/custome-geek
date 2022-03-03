@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 //components
 import ItemCountComponent from '../../shared/item-count/ItemCount.component.jsx';
+import RelatedProductsComponent from './related-products/RelatedProducts.component.jsx';
 
 //css
 import './ItemDetail.component.css'
@@ -13,7 +14,8 @@ import { useCartContext } from '../../context/cart-context/CartContextProvider.j
 //toast
 import { toast } from 'react-toastify';
 
-const ItemDetailComponent = ({ item }) => {
+
+const ItemDetailComponent = ({ item, products }) => {
 
     const { addToCart } = useCartContext()
     const [loading, setLoading] = useState(false);
@@ -41,14 +43,22 @@ const ItemDetailComponent = ({ item }) => {
     }
 
     return (
-        <div className="card mb-3 col-8 mx-auto mt-4">
+        <div className="card col-10 mx-auto mt-4 card-item-detail">
             <div className="row g-0 item-detail">
-                <div className="col-md-7">
+                <div className="col-md-6">
                     <img src={item.pictureUrl} className="item-detail-img" alt="..." />
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-6">
                     <div className="card-body">
                         <h4 className="card-title">{item.title}</h4>
+                        <nav aria-label="breadcrumb">
+                            <ol className="breadcrumb">
+                                <li className="breadcrumb-item"><Link to="/home#productos">Productos</Link></li>
+                                <li className="breadcrumb-item"><Link to={`/garment/${item.garment?.toLowerCase()}#productos`}>{item.garment}</Link></li>
+                                <li className="breadcrumb-item"><Link to={`/category/${item.category}#productos`}>{item.category?.trim().toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())}</Link></li>
+                                <li className="breadcrumb-item active" aria-current="page">{item.title}</li>
+                            </ol>
+                        </nav>
                         <h5 className="card-text" >
                             <span style={{ marginRight: 5 + 'px', fontSize: 15 + 'px', textDecoration: 'line-through' }}>
                                 {item.originalPrice !== item.price && item.originalPrice + ',00 ARS'}</span>
@@ -57,8 +67,12 @@ const ItemDetailComponent = ({ item }) => {
                         <p className="card-text">{item.description}</p>
                         {
                             item.stock > 0 ?
-                                <p className="card-text text-success">{item.stock} disponibles</p> :
-                                <p className="card-text text-danger">No hay existencias disponibles</p>
+                                <p className="card-text text-success">
+                                    <span className="badge bg-success">{item.stock} disponibles</span>
+                                </p> :
+                                <p className="card-text text-danger">
+                                    <span className="badge bg-danger"> No hay existencias disponibles</span>
+                                </p>
 
                         }
                         {
@@ -74,6 +88,7 @@ const ItemDetailComponent = ({ item }) => {
                     </div>
                 </div>
             </div>
+            <RelatedProductsComponent products={products} />
         </div>
     );
 }

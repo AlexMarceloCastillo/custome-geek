@@ -1,6 +1,47 @@
 .footer {
     color:#f7931e;
-    height: 100px;
     width: 100%;
+    height: auto;
     background-color:black;
+    padding: 2.5%;
+}
+
+.footer-icons {
+    width: 50%;
+    margin: auto;
+}
+
+.footer-icons a {
+    text-decoration: none;
+    color: none;
+}
+
+.icons {
+    margin-bottom: 15px;
+}
+
+.info-icon {
+    font-size: 50px;
+    margin: 0 10px;
+    color:#f7931e;
+}
+
+.info-icon:hover {
+    transform: scale(1.2);
+    transition: transform 330ms ease-in-out;
+}
+
+.info-send-whatsapp {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+}
+
+.whatsapp {
+    background-color: #25D366;
+    padding: 10%;
+    font-size: 55px;
+    border-radius: 50%;
+    color: white;
+    float: right;
 }

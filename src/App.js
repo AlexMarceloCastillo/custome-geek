@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 //pages components
 import HomeComponent from './components/pages/home/Home.component.jsx';
 import ItemDetailContainer from './components/pages/item-detail/ItemDetailContainer.component.jsx';
-// import Page404Component from './components/pages/page404/Page404.component.jsx';
+import Page404Component from './components/pages/page404/Page404.component.jsx';
 import CartComponent from './components/pages/cart/Cart.component.jsx';
 import SearchComponent from './components/pages/search/Search.component.jsx';
 
@@ -26,10 +26,13 @@ const App = () => {
       <NavbarComponent />
       <Routes>
         <Route exact path="/" element={<HomeComponent />}></Route>
+        <Route exact path="/home" element={<HomeComponent />}></Route>
         <Route exact path="/category/:idCategory" element={<HomeComponent />}></Route>
+        <Route exact path="/garment/:idGarment" element={<HomeComponent />}></Route>
         <Route path="/item/:id" element={<ItemDetailContainer />}></Route>
         <Route path="/search" element={<SearchComponent />}></Route>
         <Route path="/cart" element={<CartComponent />}></Route>
+        <Route path="*" element={<Page404Component />}></Route>
       </Routes>
       <FooterComponent />
       <ToastContainer />

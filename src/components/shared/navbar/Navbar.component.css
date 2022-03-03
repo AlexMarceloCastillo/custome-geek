@@ -8,15 +8,31 @@
     text-decoration: none;
     color:black;
 }
-.nav-link:hover {
-    text-decoration: none;
-    color: #292929;
-    border-bottom: 0.5px #292929 solid; 
+
+.garment-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.garment-category:hover + .dropdown-menu {
+    display: block;
+}
+
+.garment-menu {
+    right: -100px;
+    top: 0;
+}
+
+.garment-menu:hover {
+    display: block;
+}
+
+.garment-item:hover ~ .garment-menu{
+    display: block;
 }
 
 .logo {
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
 }
 
 .btn-search{

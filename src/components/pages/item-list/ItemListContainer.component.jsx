@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 //utils
-import { getAllProducts, getProductsByCategory } from '../../../utils/items';
+import { getAllProducts, getProductsByCategory, getProductsByGarment } from '../../../utils/items';
 
 //components
 import LoaderComponent from '../../shared/loader/Loader.component';
@@ -16,10 +16,12 @@ const ItemListContainerComponent = () => {
     const [productsData, setProductsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const { idCategory } = useParams()
+    const { idGarment } = useParams()
 
     useEffect(() => {
         setLoading(true);
         setProductsData([]);
+          
         if (idCategory) {
             async function getDataByCat() {
                 let products = await getProductsByCategory(idCategory)
@@ -27,7 +29,15 @@ const ItemListContainerComponent = () => {
                 setProductsData(products)
             }
             getDataByCat()
+        } else if (idGarment){
+            async function getDataByGar() {
+                let products = await getProductsByGarment(idGarment)
+                setLoading(false);
+                setProductsData(products)
+            }
+            getDataByGar()
         } else {
+            
             async function getData() {
                 let products = await getAllProducts();
                 setLoading(false);
@@ -35,7 +45,7 @@ const ItemListContainerComponent = () => {
             }
             getData()
         }
-    }, [idCategory])
+    }, [idCategory, idGarment])
 
 
     return (

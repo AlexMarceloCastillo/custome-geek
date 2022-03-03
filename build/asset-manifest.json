@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.d24dc0e4.css",
-    "main.js": "/static/js/main.3a06c60b.js",
-    "static/media/pay.jpg": "/static/media/pay.6d4ed274e333b011b640.jpg",
-    "static/media/about.jpg": "/static/media/about.8de0c70097d51b8a0343.jpg",
-    "static/media/search.jpg": "/static/media/search.cce5690a2675ffa6ab1d.jpg",
+    "main.css": "/static/css/main.9b437278.css",
+    "main.js": "/static/js/main.07c43c5e.js",
     "static/media/custom-geek-logoV1.png": "/static/media/custom-geek-logoV1.e63498c883f6ee3f9f02.png",
-    "static/media/background-home.jpg": "/static/media/background-home.447c157ba986089fe54d.jpg",
+    "static/media/not-found-404.png": "/static/media/not-found-404.3da64960c004ec2f5ecf.png",
+    "static/media/where-are.png": "/static/media/where-are.b08fbed35d7810cd66a5.png",
+    "static/media/google-maps.png": "/static/media/google-maps.63da7f40d9a7f1e9a6c1.png",
+    "static/media/payment.png": "/static/media/payment.203b3d013aee41a0c282.png",
+    "static/media/about.png": "/static/media/about.7f3c3268cdc2edc52ff6.png",
     "index.html": "/index.html",
-    "main.d24dc0e4.css.map": "/static/css/main.d24dc0e4.css.map",
-    "main.3a06c60b.js.map": "/static/js/main.3a06c60b.js.map"
+    "main.9b437278.css.map": "/static/css/main.9b437278.css.map",
+    "main.07c43c5e.js.map": "/static/js/main.07c43c5e.js.map"
   },
   "entrypoints": [
-    "static/css/main.d24dc0e4.css",
-    "static/js/main.3a06c60b.js"
+    "static/css/main.9b437278.css",
+    "static/js/main.07c43c5e.js"
   ]
 }

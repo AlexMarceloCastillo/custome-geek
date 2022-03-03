@@ -32,7 +32,8 @@ const CartContextProvider = ({ children}) => {
         setCartList(removeItemInCart(cartList, item, setCartCount, setTotalPrice))
         toast.success(`Producto ${item.title} eliminado de su carrito`, {
             position: toast.POSITION.BOTTOM_RIGHT,
-            theme: 'colored'
+            theme: 'colored',
+            autoClose: 5000
         })
     }
 
@@ -42,7 +43,8 @@ const CartContextProvider = ({ children}) => {
         setTotalPrice(0)
         toast.success(`Todos los productos eliminados de su carrito`, {
             position: toast.POSITION.BOTTOM_RIGHT,
-            theme: 'colored'
+            theme: 'colored',
+            autoClose: 5000
         })
     }
 
