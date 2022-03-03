@@ -11,9 +11,15 @@ Proyecto final del curso de React de CODERHOUSE
 
 [localhost:3000/category/:id] ----> HomeComponent
 
+[localhost:3000/garment/:id] ----> HomeComponent
+
 [localhost:3000/search] ----> SearchComponent
 
 [localhost:3000/item/:id] ----> ItemDetail
+
+[localhost:3000/cart] ----> CartComponent
+
+
 
 #Modelo Item
 
@@ -23,7 +29,8 @@ description: string,
 price: number,
 category: string,
 stock: number,
-pictureUrl: string
+pictureUrl: string,
+garment: string,
 }
 
 --------------------------------------------------------------------
