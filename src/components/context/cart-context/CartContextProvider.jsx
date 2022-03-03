@@ -22,10 +22,6 @@ const CartContextProvider = ({ children}) => {
     const addToCart = (item, quantity = 0) => {
         setCartList(addItem(cartList, item, quantity))
         setCartCount(increaseCart(cartList))
-        toast.success(`Producto ${item.title} añadido a su carrito`, {
-            position: toast.POSITION.BOTTOM_RIGHT,
-            theme: 'colored'
-        })
     }
 
     const removeItem = (item) => {

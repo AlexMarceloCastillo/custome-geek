@@ -1,5 +1,9 @@
 
 
+//toast
+import { toast } from 'react-toastify';
+
+
 //Añadir en el cart list
 const addItem = (cartList, item, quantity) => {
     let index = isInCart(cartList, item.id)
@@ -7,6 +11,11 @@ const addItem = (cartList, item, quantity) => {
         //Existe en el carrito sin haberle seteado la cantidad (desde home)
         if (!quantity && cartList[index].quantity < item.stock) {
             cartList[index].quantity++
+            toast.success(`Producto ${item.title} añadido a su carrito`, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                theme: 'colored',
+                toastId: 'item-quantity'
+            })
         }
         if (quantity && cartList[index].quantity + quantity > cartList[index].item.stock) {
             throw new Error(`No puedes añadir esa cantidad(${quantity}) al carrito — tenemos ${item.stock} existencias y tienes ${cartList[index].quantity} en tu carrito.`)
@@ -17,6 +26,10 @@ const addItem = (cartList, item, quantity) => {
     } else {
         //No existe en el carrito agregar un producto nuevo 
         cartList.push({ item, quantity: quantity > 0 ? quantity : 1 })
+        toast.success(`Producto ${item.title} añadido a su carrito`, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+            theme: 'colored'
+        })
     }
     return cartList
 }
